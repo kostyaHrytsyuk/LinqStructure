@@ -43,18 +43,19 @@ namespace LinqStructure
             #region Users
             var rawUsers = DownloadApiDataByUrl<RawUser>("users");
             Users = (from user in rawUsers
-                    join post in Posts on user.Id equals post.UserId into userPosts
-                    join todo in Todos on user.Id equals todo.UserId into userTodos
-                    select new User()
-                    {
-                        Id = user.Id,
-                        CreatedAt = user.CreatedAt,
-                        Name = user.Name,
-                        Posts = userPosts.ToList(),
-                        Avatar = user.Avatar,
-                        Email = user.Email,
-                        Todos = userTodos.ToList()
-                    }).ToList();
+                     join post in Posts on user.Id equals post.UserId into userPosts
+                     join todo in Todos on user.Id equals todo.UserId into userTodos
+                     join comment in Comments on user.Id equals comment.UserId into userComments
+                     select new User()
+                     {
+                         Id = user.Id,
+                         CreatedAt = user.CreatedAt,
+                         Name = user.Name,
+                         Posts = userPosts.ToList(),
+                         Avatar = user.Avatar,
+                         Email = user.Email,
+                         Todos = userTodos.ToList()
+                     }).ToList();
             #endregion
         }
         #endregion
@@ -67,14 +68,34 @@ namespace LinqStructure
         #endregion
 
         #region Get Data Methods
-        public Dictionary<Post,int> GetNumberOfCommentsForUsersPosts(int userId)
+        public Dictionary<Post, int> GetNumberOfCommentsForUsersPosts(int userId)
         {
             var usersPosts = (from post in Posts
-                          where post.UserId == userId
-                          select new { post, post.Comments.Count })
-                          .ToDictionary(p => p.post, post => post.Count);
-            
+                              where post.UserId == userId
+                              select new { post, post.Comments.Count })
+                              .ToDictionary(p => p.post, post => post.Count);
+
             return usersPosts;
+        }
+
+        public List<Comment> GetShortCommentsForUserPosts(int userId)
+        {
+            var usersPostsComments = from post in Posts
+                                     where post.UserId == userId
+                                     select post.Comments;
+
+            var shortComments = new List<Comment>();
+
+            foreach (var comments in usersPostsComments)
+            {
+                var s = from comment in comments
+                        where comment.Body.Count() < 50
+                        select comment;
+
+                shortComments.AddRange(s);
+            }
+
+            return shortComments;
         }
         #endregion
 

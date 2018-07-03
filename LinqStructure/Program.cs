@@ -7,7 +7,6 @@ namespace LinqStructure
         private static LinqService _service = LinqService.Service;
         static void Main(string[] args)
         {
-            
 
             Console.ReadKey();
         }
