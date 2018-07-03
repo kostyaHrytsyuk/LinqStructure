@@ -2,7 +2,7 @@
 
 namespace LinqStructure.Entities
 {
-    public class User
+    public class RawUser
     {
         public int Id { get; set; }
         public DateTime CreatedAt { get; set; }

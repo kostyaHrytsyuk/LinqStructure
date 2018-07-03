@@ -1,9 +1,8 @@
 ﻿using System;
 
-
 namespace LinqStructure.Entities
 {
-    public class Post
+    public class RawPost
     {
         public int Id { get; set; }
         public DateTime CreatedAt { get; set; }
