@@ -66,6 +66,18 @@ namespace LinqStructure
         private List<User> Users { get; }
         #endregion
 
+        #region Get Data Methods
+        public Dictionary<Post,int> GetNumberOfCommentsForUsersPosts(int userId)
+        {
+            var usersPosts = (from post in Posts
+                          where post.UserId == userId
+                          select new { post, post.Comments.Count })
+                          .ToDictionary(p => p.post, post => post.Count);
+            
+            return usersPosts;
+        }
+        #endregion
+
         #region Downloading data from API
         private static List<T> DownloadApiDataByUrl<T>(string urlParam) where T : new()
         {
