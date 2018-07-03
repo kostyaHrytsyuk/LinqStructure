@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace LinqStructure.Entities
 {
     public class Comment
