@@ -106,6 +106,14 @@ namespace LinqStructure
 
              return userTodosDone;
         }
+
+        public List<User> GetUsersSortedByAlphabet()
+        {
+            var usersSorted = (Users.OrderBy(u => u.Name)).ToList();
+            usersSorted.ForEach(u => u.Todos = u.Todos.OrderByDescending(t => t.Name.Count()).ToList());
+            
+            return usersSorted;
+        }
         #endregion
 
         #region Downloading data from API
