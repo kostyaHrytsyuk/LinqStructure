@@ -2,10 +2,10 @@
 {
     public struct PostX
     {
-        Post Post { get; }
-        Comment LongestComment { get; }
-        Comment BestCommentByLikes { get; }
-        int NumberOfShort_ZeroLikesComment { get; }
+        public Post Post { get; }
+        public Comment LongestComment { get; }
+        public Comment BestCommentByLikes { get; }
+        public int NumberOfShort_ZeroLikesComment { get; }
         
         public PostX(Post post, Comment longestComment, Comment bestCommentByLikes, int numberOfShort_ZeroLikesComment) : this()
         {

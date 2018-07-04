@@ -2,12 +2,12 @@
 {
     public struct UserX
     {
-        User User { get; }
-        Post LastPost { get; }
-        int NumbersOfCommentsOfLastPost { get; }
-        int UndoneTodosNumber { get; }
-        Post BestPostByComments { get; }
-        Post BestPostByLikes { get; }
+        public User User { get; }
+        public Post LastPost { get; }
+        public int NumbersOfCommentsOfLastPost { get; }
+        public int UndoneTodosNumber { get; }
+        public Post BestPostByComments { get; }
+        public Post BestPostByLikes { get; }
 
         public UserX(User user, Post lastPost, int numbersOfCommentsOfLastPost, int undoneTodosNumber, Post bestPostByComments, Post bestPostByLikes) : this()
         {
