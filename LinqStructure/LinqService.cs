@@ -89,7 +89,7 @@ namespace LinqStructure
             foreach (var comments in usersPostsComments)
             {
                 var s = from comment in comments
-                        where comment.Body.Count() < 50
+                        where comment.Body.Length < 50
                         select comment;
 
                 shortComments.AddRange(s);
@@ -110,7 +110,7 @@ namespace LinqStructure
         public List<User> GetUsersSortedByAlphabet()
         {
             var usersSorted = (Users.OrderBy(u => u.Name)).ToList();
-            usersSorted.ForEach(u => u.Todos = u.Todos.OrderByDescending(t => t.Name.Count()).ToList());
+            usersSorted.ForEach(u => u.Todos = u.Todos.OrderByDescending(t => t.Name.Length).ToList());
 
             return usersSorted;
         }
@@ -130,7 +130,7 @@ namespace LinqStructure
 
             var bestPostByComments = (from post in user.Posts
                                       where post.Id == ((from comment in commentsForUserPosts
-                                                         where comment.Body.Count() == commentsForUserPosts.Max(c => c.Body.Count())
+                                                         where comment.Body.Length == commentsForUserPosts.Max(c => c.Body.Length)
                                                          select comment.PostId).FirstOrDefault())
                                       select post).FirstOrDefault();
 
@@ -155,7 +155,7 @@ namespace LinqStructure
             var post = Posts.Where(p => p.Id == postId).FirstOrDefault();
 
             var longestComment = (from comment in post.Comments
-                                  where comment.Body.Count() == post.Comments.Max(c => c.Body.Count())
+                                  where comment.Body.Length == post.Comments.Max(c => c.Body.Length)
                                   select comment).FirstOrDefault();
 
             var bestCommentByLikes = (from comment in post.Comments
@@ -163,7 +163,7 @@ namespace LinqStructure
                                       select comment).FirstOrDefault();
 
             var numberOfShort_ZeroLikesComment = (from comment in post.Comments
-                                                  where comment.Likes == 0 || comment.Body.Count() < 80
+                                                  where comment.Likes == 0 || comment.Body.Length < 80
                                                   select comment).Count();
                         
             var postX = new PostX(post,
