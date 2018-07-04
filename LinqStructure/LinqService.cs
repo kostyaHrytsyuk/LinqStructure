@@ -69,12 +69,11 @@ namespace LinqStructure
         #endregion
 
         #region Get Data Methods
-        public Dictionary<Post, int> GetNumberOfCommentsForUsersPosts(int userId)
+        public List<Post> GetUsersPosts(int userId)
         {
             var usersPosts = (from post in Posts
                               where post.UserId == userId
-                              select new { post, post.Comments.Count })
-                              .ToDictionary(p => p.post, post => post.Count);
+                              select post).ToList();
 
             return usersPosts;
         }
@@ -86,7 +85,7 @@ namespace LinqStructure
                                      select post.Comments;
 
             var shortComments = new List<Comment>();
-
+                        
             foreach (var comments in usersPostsComments)
             {
                 var s = from comment in comments
@@ -122,7 +121,7 @@ namespace LinqStructure
 
             var lastPost = (from post in user.Posts
                             where post.CreatedAt == user.Posts.Max(p => p.CreatedAt)
-                            select (Post: post, numberOfLastPostComments: post.Comments.Count)).FirstOrDefault();
+                            select post).FirstOrDefault();
 
             var undoneTodosNumber = user.Todos.Where(t => t.IsComplete == false).Count();
 
@@ -142,8 +141,8 @@ namespace LinqStructure
                                    select post).FirstOrDefault();
 
             var userX = new UserX(user,
-                                  lastPost.Post,
-                                  lastPost.numberOfLastPostComments,
+                                  lastPost,
+                                  lastPost.Comments.Count,
                                   undoneTodosNumber,
                                   bestPostByComments,
                                   bestPostByLikes);
