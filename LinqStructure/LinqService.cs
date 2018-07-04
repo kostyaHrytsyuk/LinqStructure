@@ -97,6 +97,15 @@ namespace LinqStructure
 
             return shortComments;
         }
+        
+        public List<Todo> GetUsersTodosDone(int userId)
+        {
+            var userTodosDone = (from todo in Todos
+                                 where todo.UserId == userId && todo.IsComplete == true
+                                 select todo).ToList();
+
+             return userTodosDone;
+        }
         #endregion
 
         #region Downloading data from API
