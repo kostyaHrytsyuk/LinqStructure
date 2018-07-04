@@ -98,57 +98,81 @@ namespace LinqStructure
 
             return shortComments;
         }
-        
+
         public List<Todo> GetUsersTodosDone(int userId)
         {
             var userTodosDone = (from todo in Todos
                                  where todo.UserId == userId && todo.IsComplete == true
                                  select todo).ToList();
 
-             return userTodosDone;
+            return userTodosDone;
         }
 
         public List<User> GetUsersSortedByAlphabet()
         {
             var usersSorted = (Users.OrderBy(u => u.Name)).ToList();
             usersSorted.ForEach(u => u.Todos = u.Todos.OrderByDescending(t => t.Name.Count()).ToList());
-            
+
             return usersSorted;
         }
-        
+
         public UserX GetUserX(int userId)
         {
             var user = Users.Where(u => u.Id == userId).FirstOrDefault();
 
             var lastPost = (from post in user.Posts
-                           where post.CreatedAt == user.Posts.Max(p => p.CreatedAt)
-                           select (Post: post, numberOfLastPostComments: post.Comments.Count)).FirstOrDefault();
+                            where post.CreatedAt == user.Posts.Max(p => p.CreatedAt)
+                            select (Post: post, numberOfLastPostComments: post.Comments.Count)).FirstOrDefault();
 
             var undoneTodosNumber = user.Todos.Where(t => t.IsComplete == false).Count();
 
             var commentsForUserPosts = new List<Comment>();
-                user.Posts.ForEach(p => commentsForUserPosts.AddRange(p.Comments));
+            user.Posts.ForEach(p => commentsForUserPosts.AddRange(p.Comments));
 
-            var bestPostByComments = from post in user.Posts
-                                     where post.Id == ((from comment in commentsForUserPosts
-                                                       where comment.Body.Count() == commentsForUserPosts.Max(c => c.Body.Count())
-                                                       select comment.PostId).FirstOrDefault())
-                                     select post;
+            var bestPostByComments = (from post in user.Posts
+                                      where post.Id == ((from comment in commentsForUserPosts
+                                                         where comment.Body.Count() == commentsForUserPosts.Max(c => c.Body.Count())
+                                                         select comment.PostId).FirstOrDefault())
+                                      select post).FirstOrDefault();
 
-            var bestPostByLikes = from post in user.Posts
-                                  where post.Id == ((from comment in commentsForUserPosts
-                                                    where comment.Likes == commentsForUserPosts.Max(c => c.Likes)
-                                                    select comment.PostId).FirstOrDefault())
-                                  select post;
+            var bestPostByLikes = (from post in user.Posts
+                                   where post.Id == ((from comment in commentsForUserPosts
+                                                      where comment.Likes == commentsForUserPosts.Max(c => c.Likes)
+                                                      select comment.PostId).FirstOrDefault())
+                                   select post).FirstOrDefault();
 
-            var userX = new UserX(user, 
+            var userX = new UserX(user,
                                   lastPost.Post,
                                   lastPost.numberOfLastPostComments,
-                                  undoneTodosNumber, 
-                                  bestPostByComments.FirstOrDefault(), 
-                                  bestPostByLikes.FirstOrDefault());
+                                  undoneTodosNumber,
+                                  bestPostByComments,
+                                  bestPostByLikes);
 
             return userX;
+        }
+
+        public PostX GetPostX(int postId)
+        {
+            var post = Posts.Where(p => p.Id == postId).FirstOrDefault();
+
+            var longestComment = (from comment in post.Comments
+                                  where comment.Body.Count() == post.Comments.Max(c => c.Body.Count())
+                                  select comment).FirstOrDefault();
+
+            var bestCommentByLikes = (from comment in post.Comments
+                                      where comment.Likes == post.Comments.Max(c => c.Likes)
+                                      select comment).FirstOrDefault();
+
+            var numberOfShort_ZeroLikesComment = (from comment in post.Comments
+                                                  where comment.Likes == 0 || comment.Body.Count() < 80
+                                                  select comment).Count();
+                        
+            var postX = new PostX(post,
+                                  longestComment,
+                                  bestCommentByLikes,
+                                  numberOfShort_ZeroLikesComment);
+
+            return postX;
         }
         #endregion
 

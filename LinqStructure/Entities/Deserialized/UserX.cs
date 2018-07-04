@@ -9,7 +9,7 @@
         Post BestPostByComments { get; }
         Post BestPostByLikes { get; }
 
-        public UserX(User user, Post lastPost, int numbersOfCommentsOfLastPost, int undoneTodosNumber, Post bestPostByComments, Post bestPostByLikes)
+        public UserX(User user, Post lastPost, int numbersOfCommentsOfLastPost, int undoneTodosNumber, Post bestPostByComments, Post bestPostByLikes) : this()
         {
             User = user;
             LastPost = lastPost;
