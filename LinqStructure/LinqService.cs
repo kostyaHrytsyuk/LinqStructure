@@ -3,6 +3,7 @@ using System.Net;
 using System.Linq;
 using System.Collections.Generic;
 using LinqStructure.Entities;
+using LinqStructure.Entities.Deserialized;
 using Newtonsoft.Json;
 
 namespace LinqStructure
@@ -113,6 +114,41 @@ namespace LinqStructure
             usersSorted.ForEach(u => u.Todos = u.Todos.OrderByDescending(t => t.Name.Count()).ToList());
             
             return usersSorted;
+        }
+        
+        public UserX GetUserX(int userId)
+        {
+            var user = Users.Where(u => u.Id == userId).FirstOrDefault();
+
+            var lastPost = (from post in user.Posts
+                           where post.CreatedAt == user.Posts.Max(p => p.CreatedAt)
+                           select (Post: post, numberOfLastPostComments: post.Comments.Count)).FirstOrDefault();
+
+            var undoneTodosNumber = user.Todos.Where(t => t.IsComplete == false).Count();
+
+            var commentsForUserPosts = new List<Comment>();
+                user.Posts.ForEach(p => commentsForUserPosts.AddRange(p.Comments));
+
+            var bestPostByComments = from post in user.Posts
+                                     where post.Id == ((from comment in commentsForUserPosts
+                                                       where comment.Body.Count() == commentsForUserPosts.Max(c => c.Body.Count())
+                                                       select comment.PostId).FirstOrDefault())
+                                     select post;
+
+            var bestPostByLikes = from post in user.Posts
+                                  where post.Id == ((from comment in commentsForUserPosts
+                                                    where comment.Likes == commentsForUserPosts.Max(c => c.Likes)
+                                                    select comment.PostId).FirstOrDefault())
+                                  select post;
+
+            var userX = new UserX(user, 
+                                  lastPost.Post,
+                                  lastPost.numberOfLastPostComments,
+                                  undoneTodosNumber, 
+                                  bestPostByComments.FirstOrDefault(), 
+                                  bestPostByLikes.FirstOrDefault());
+
+            return userX;
         }
         #endregion
 
