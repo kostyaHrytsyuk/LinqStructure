@@ -14,7 +14,6 @@ namespace ConsoleMenu
             Console.Clear();
 
             Menu.MenuMap();
-
         }
     }
 }
