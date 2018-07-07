@@ -1,4 +1,4 @@
-﻿namespace LinqStructure.Entities.Deserialized
+﻿namespace LinqService.Entities.Deserialized
 {
     public struct UserX
     {

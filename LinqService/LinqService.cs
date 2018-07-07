@@ -2,11 +2,11 @@
 using System.Net;
 using System.Linq;
 using System.Collections.Generic;
-using LinqStructure.Entities;
-using LinqStructure.Entities.Deserialized;
+using LinqService.Entities;
+using LinqService.Entities.Deserialized;
 using Newtonsoft.Json;
 
-namespace LinqStructure
+namespace LinqService
 {
     public sealed class LinqService
     {

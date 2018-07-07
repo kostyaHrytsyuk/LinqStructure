@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
-using LinqStructure.Entities;
+using LinqService.Entities;
 
-namespace LinqStructure
+namespace LinqService
 {
     static class Menu
     {
