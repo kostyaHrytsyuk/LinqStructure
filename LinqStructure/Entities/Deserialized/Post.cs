@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace LinqService.Entities
+namespace LinqStructure.Entities
 {
-    public class RawPost
+    public class Post
     {
         public int Id { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -10,5 +11,6 @@ namespace LinqService.Entities
         public string Body { get; set; }
         public int UserId { get; set; }
         public int Likes { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

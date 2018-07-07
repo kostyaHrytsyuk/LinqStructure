@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace LinqService
+namespace LinqStructure
 {
     class Program
     {
