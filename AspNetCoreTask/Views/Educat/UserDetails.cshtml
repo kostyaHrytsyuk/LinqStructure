@@ -1,0 +1,50 @@
+﻿@model List<LinqStructure.Entities.User>
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div>
+    <h4>Users</h4>
+    <hr />
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Number of Todos</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var user in Model)
+            {
+            <tr>
+                <td>@Html.ActionLink(user.Name, "UserView", "Educat", new { id = user.Id })</td>
+                <td>@user.Todos.Count</td>
+            </tr>
+
+                @*if (user.Todos.Count > 0)
+                    {
+                        <h4>Todo</h4>
+                        <dl class="dl-horizontal">
+
+                            @foreach (var todo in user.Todos)
+                            {
+                                <dt>
+                                    @Html.Label("Name:")
+                                </dt>
+                                <dd>
+                                    @Html.Label(todo.Name)
+                                </dd>
+                            }
+                        </dl>
+
+                    }*@
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

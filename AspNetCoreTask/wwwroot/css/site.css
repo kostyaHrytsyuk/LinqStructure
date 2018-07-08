@@ -1,6 +1,5 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    background-color:azure;
 }
 
 /* Wrapping element */
@@ -32,4 +31,13 @@
     .carousel-caption {
         display: none;
     }
+}
+
+.display-label{
+    width: 275px;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

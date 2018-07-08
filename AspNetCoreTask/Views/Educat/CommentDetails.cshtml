@@ -1,0 +1,35 @@
+﻿@model List<LinqStructure.Entities.Comment>
+
+@{
+    ViewData["Title"] = "CommentDetails";
+}
+
+<h2>Comment Details</h2>
+
+<div>
+    <h4>Comment</h4>
+    <hr />
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Comment id</th>
+                <th scope="col">Comment Text</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var comment in Model)
+            {
+                <tr>
+                    <td>@comment.Id</td>
+                    <td>@comment.Body</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

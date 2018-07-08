@@ -1,0 +1,44 @@
+﻿@model LinqStructure.Entities.Deserialized.PostX
+
+@{
+    ViewData["Title"] = "PostXDetails";
+}
+
+<h2>PostXDetails</h2>
+
+<div>
+    <h4>PostX</h4>
+    <hr />
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Post title</th>
+                <th scope="col">Post body</th>
+                <th scope="col">The longest comment</th>
+                <th scope="col">The most liked comment</th>
+                <th scope="col">Number of short or zero likes comments</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>@Model.Post.Title</td>
+                <td>@Model.Post.Body</td>
+                @if (Model.Post.Comments.Count > 0)
+                {
+                    <td>@Model.LongestComment.Body</td>
+                    <td>@Model.BestCommentByLikes.Body</td>
+                    <td>@Model.NumberOfShort_ZeroLikesComment</td>
+                }
+                else
+                {
+                    <td>There are no comments for this post</td>
+                }
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

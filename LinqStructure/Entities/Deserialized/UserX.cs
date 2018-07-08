@@ -1,4 +1,6 @@
-﻿namespace LinqStructure.Entities.Deserialized
+﻿using System.ComponentModel;
+
+namespace LinqStructure.Entities.Deserialized
 {
     public struct UserX
     {
