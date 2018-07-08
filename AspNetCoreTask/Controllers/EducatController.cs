@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using LinqStructure;
 using AspNetCoreTask.Models;
+using System;
 
 namespace AspNetCoreTask.Controllers
 {
@@ -17,6 +18,17 @@ namespace AspNetCoreTask.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult SearchUser()
+        {
+            return View("SearchUser");
+        }
+
+        public IActionResult UserDetails(int userId)
+        {
+            var user = _service.GetUserX(userId);
+            return PartialView("UserXDetails",user);
         }
 
         public IActionResult Error()
