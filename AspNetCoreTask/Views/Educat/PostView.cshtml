@@ -1,0 +1,64 @@
+﻿@model LinqStructure.Entities.Post
+
+@{
+    ViewData["Title"] = "PostView";
+}
+
+
+<div>
+
+    <hr />
+    <dl class="row ml-1 mr-1">
+        <div class="row col-md-12">
+            <dt class="col-md-2">
+                <h4>@Html.Label("Post")</h4>
+            </dt>
+            <dd class="col-md-8">
+                <h4>@Html.DisplayFor(model => model.Title)</h4>
+            </dd>
+        </div>
+        <div class="row col-md-12 d-flex justify-content-between">
+            <div class="col-md-4">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Body)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Body)
+                </dd>
+            </div>
+            <div class="col-md-4">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Likes)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Likes)
+                </dd>
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <h5 class="col-md-12">Comments</h5>
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Comment</th>
+                        <th scope="col">Likes</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <tr>
+                            <td>@comment.Body</td>
+                            <td>@comment.Likes</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </dl>
+
+</div>
+<div>
+    <a class="btn btn-secondary" onclick="window.history.back()">Back</a>
+</div>

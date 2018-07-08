@@ -4,10 +4,8 @@
     ViewData["Title"] = "Search";
 }
 
-<h2>Search</h2>
-
 <div>
-    <h4>User</h4>
+    <h4>Users</h4>
     <hr />
     <table class="table table-bordered table-hover">
         <thead class="thead-dark">
@@ -20,10 +18,10 @@
         <tbody>
             @foreach (var user in Model)
             {
-                <tr>
-                    <td>@user.Name</td>
-                    <td>@user.Todos.Count</td>
-                </tr>
+            <tr>
+                <td>@Html.ActionLink(user.Name, "UserView", "Educat", new { id = user.Id })</td>
+                <td>@user.Todos.Count</td>
+            </tr>
 
                 @*if (user.Todos.Count > 0)
                     {

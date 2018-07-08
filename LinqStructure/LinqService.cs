@@ -69,6 +69,21 @@ namespace LinqStructure
         #endregion
 
         #region Get Data Methods
+        public Todo GetTodo(int id)
+        {
+            return Todos.Where(t => t.Id == id).FirstOrDefault();
+        }
+
+        public Post GetPost(int id)
+        {
+            return Posts.Where(p => p.Id == id).FirstOrDefault();
+        }
+
+        public User GetUser(int id)
+        {
+            return Users.Where(u => u.Id == id).FirstOrDefault();
+        }
+
         public List<Post> GetUsersPosts(int userId)
         {
    

@@ -1,0 +1,47 @@
+﻿@model LinqStructure.Entities.User
+
+@{
+    ViewData["Title"] = "UserView";
+}
+
+
+
+<div>
+
+    <hr />
+    <dl class="row  ml-1 mr-1">
+        <div class="row col-md-12 d-flex justify-content-between">
+            <div class="col-md-4">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+            </div>
+            <div class="col-md-4">
+                <img src="@Model.Avatar" />
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <h5 class="col-md-12">Posts</h5>
+            <ul class="list-group list-group-flush">
+                @foreach (var post in Model.Posts)
+                {
+                    <li class="list-group-item">@Html.ActionLink(post.Title, "PostView", "Educat", new { id = post.Id })</li>
+                }
+            </ul>
+
+
+        </div>
+    </dl>
+</div>
+<div>
+    <a>@Html.ActionLink("Back to List", "SearchUsers", "Educat")</a>
+</div>

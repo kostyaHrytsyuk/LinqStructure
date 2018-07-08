@@ -104,6 +104,21 @@ namespace AspNetCoreTask.Controllers
         #endregion
         #endregion
 
+        #region Entities Views
+        public IActionResult PostView(int id)
+        {
+            var post = _service.GetPost(id);
+
+            return View("PostView", post);
+        }
+
+        public IActionResult UserView(int id)
+        {
+            var user = _service.GetUser(id);
+
+            return View("UserView",user);
+        }
+        #endregion
 
         public IActionResult Error()
         {
