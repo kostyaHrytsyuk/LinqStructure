@@ -20,15 +20,26 @@ namespace AspNetCoreTask.Controllers
             return View();
         }
 
-        public IActionResult SearchUser()
+        public IActionResult SearchUserX()
         {
-            return View("SearchUser");
+            return View("SearchUserX");
         }
 
-        public IActionResult UserDetails(int userId)
+        public IActionResult UserXDetails(int userId)
         {
             var user = _service.GetUserX(userId);
-            return PartialView("UserXDetails",user);
+            return View("UserXDetails",user);
+        }
+
+        public IActionResult SearchPostX()
+        {
+            return View();
+        }
+
+        public IActionResult PostXDetails(int postId)
+        {
+            var postX = _service.GetPostX(postId);
+            return View("PostXDetails", postX);
         }
 
         public IActionResult Error()

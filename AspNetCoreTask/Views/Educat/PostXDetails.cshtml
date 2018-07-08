@@ -1,0 +1,52 @@
+﻿@model LinqStructure.Entities.Deserialized.PostX
+
+@{
+    ViewData["Title"] = "PostXDetails";
+}
+
+<h2>PostXDetails</h2>
+
+<div>
+    <h4>PostX</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Post title")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Post.Title)
+        </dd>
+        <dt>
+            @Html.Label("Post body")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Post.Body)
+        </dd>
+        @if (Model.Post.Comments.Count != 0)
+        {
+            <dt>
+                @Html.Label("The longest comment")
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LongestComment.Body)
+            </dd>
+            <dt>
+                @Html.Label("The most liked comment")
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BestCommentByLikes.Body)
+            </dd>
+            <dt>
+                @Html.Label("Number of short or zero likes comments")
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NumberOfShort_ZeroLikesComment)
+            </dd>
+        }
+
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
