@@ -181,7 +181,7 @@ namespace LinqStructure
             Console.WriteLine($"Last Post: {userX.LastPost.Title}");
             Console.WriteLine($"Numbers Of Comments Of Last Post: {userX.NumbersOfCommentsOfLastPost}");
             Console.WriteLine($"Number of Undone Todos: {userX.NumbersOfCommentsOfLastPost}");
-            Console.WriteLine($"The most popular post by comments: {userX.BestPostByComments.Title}");
+            Console.WriteLine($"The most popular post by comments: { (userX.BestPostByComments != null ? userX.BestPostByComments.Title : $"{userX.User.Name} has no comments for own posts")}");
             Console.WriteLine($"The most popular post by likes: {userX.BestPostByLikes.Title}");
 
             ReturnToMenu();

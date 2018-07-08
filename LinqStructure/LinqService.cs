@@ -135,9 +135,7 @@ namespace LinqStructure
                                       select post).FirstOrDefault();
 
             var bestPostByLikes = (from post in user.Posts
-                                   where post.Id == ((from comment in commentsForUserPosts
-                                                      where comment.Likes == commentsForUserPosts.Max(c => c.Likes)
-                                                      select comment.PostId).FirstOrDefault())
+                                   where post.Likes == user.Posts.Max(p => p.Likes)
                                    select post).FirstOrDefault();
 
             var userX = new UserX(user,
