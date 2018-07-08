@@ -136,7 +136,7 @@ namespace LinqStructure
         {
             var id = EnterId<User>();
 
-            var todos = _service.GetUsersTodosDone(id);
+            var todos = _service.GetUserTodosDone(id);
 
             if (todos.Count != 0)
             {

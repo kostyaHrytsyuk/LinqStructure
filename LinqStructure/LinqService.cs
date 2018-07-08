@@ -100,7 +100,7 @@ namespace LinqStructure
             return shortComments;
         }
 
-        public List<Todo> GetUsersTodosDone(int userId)
+        public List<Todo> GetUserTodosDone(int userId)
         {
             var userTodosDone = (from todo in Todos
                                  where todo.UserId == userId && todo.IsComplete == true

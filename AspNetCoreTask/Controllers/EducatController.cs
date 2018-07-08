@@ -48,6 +48,19 @@ namespace AspNetCoreTask.Controllers
         }
         #endregion
 
+        #region Todos
+        public IActionResult SearchTodos()
+        {
+            return View();
+        }
+
+        public IActionResult GetDoneTodos(int userId)
+        {
+            var todos = _service.GetUserTodosDone(userId);
+            return View("TodoDetails",todos);
+        }
+        #endregion
+
         #region PostX
         public IActionResult SearchPostX()
         {
