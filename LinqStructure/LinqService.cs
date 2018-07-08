@@ -69,8 +69,25 @@ namespace LinqStructure
         #endregion
 
         #region Get Data Methods
+        public Todo GetTodo(int id)
+        {
+            return Todos.Where(t => t.Id == id).FirstOrDefault();
+        }
+
+        public Post GetPost(int id)
+        {
+            return Posts.Where(p => p.Id == id).FirstOrDefault();
+        }
+
+        public User GetUser(int id)
+        {
+            return Users.Where(u => u.Id == id).FirstOrDefault();
+        }
+
         public List<Post> GetUsersPosts(int userId)
         {
+   
+
             var usersPosts = (from post in Posts
                               where post.UserId == userId
                               select post).ToList();
@@ -98,7 +115,7 @@ namespace LinqStructure
             return shortComments;
         }
 
-        public List<Todo> GetUsersTodosDone(int userId)
+        public List<Todo> GetUserTodosDone(int userId)
         {
             var userTodosDone = (from todo in Todos
                                  where todo.UserId == userId && todo.IsComplete == true
@@ -135,9 +152,7 @@ namespace LinqStructure
                                       select post).FirstOrDefault();
 
             var bestPostByLikes = (from post in user.Posts
-                                   where post.Id == ((from comment in commentsForUserPosts
-                                                      where comment.Likes == commentsForUserPosts.Max(c => c.Likes)
-                                                      select comment.PostId).FirstOrDefault())
+                                   where post.Likes == user.Posts.Max(p => p.Likes)
                                    select post).FirstOrDefault();
 
             var userX = new UserX(user,

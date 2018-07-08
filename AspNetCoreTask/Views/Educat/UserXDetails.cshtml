@@ -1,0 +1,40 @@
+﻿@model LinqStructure.Entities.Deserialized.UserX
+
+@{
+    ViewData["Title"] = "UserXDetails";
+}
+
+<h2>UserXDetails</h2>
+
+<div>
+    <h4>UserX</h4>
+    <hr />
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">User</th>
+                <th scope="col">Last Post</th>
+                <th scope="col">Numbers Of Comments Of Last Post</th>
+                <th scope="col">Number of undone todos</th>
+                <th scope="col">The best post by comments</th>
+                <th scope="col">The best post by likes</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>@Model.User.Name</td>
+                <td>@Model.LastPost.Title</td>
+                <td>@Model.NumbersOfCommentsOfLastPost</td>
+                <td>@Model.UndoneTodosNumber</td>
+                <td>@Model.BestPostByComments.Title</td>
+                <td>@Model.BestPostByLikes.Title</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
