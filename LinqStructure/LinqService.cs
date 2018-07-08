@@ -71,6 +71,8 @@ namespace LinqStructure
         #region Get Data Methods
         public List<Post> GetUsersPosts(int userId)
         {
+   
+
             var usersPosts = (from post in Posts
                               where post.UserId == userId
                               select post).ToList();

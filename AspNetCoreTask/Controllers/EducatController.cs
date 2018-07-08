@@ -20,17 +20,20 @@ namespace AspNetCoreTask.Controllers
             return View();
         }
 
-        public IActionResult SearchUserX()
+        #region Views For Service Methods
+
+        public IActionResult SearchPosts()
         {
-            return View("SearchUserX");
+            return View();
         }
 
-        public IActionResult UserXDetails(int userId)
+        public IActionResult GetUserPosts(int userId)
         {
-            var user = _service.GetUserX(userId);
-            return View("UserXDetails",user);
+            var posts = _service.GetUsersPosts(userId);
+            return View("PostDetails",posts);
         }
 
+        #region PostX
         public IActionResult SearchPostX()
         {
             return View();
@@ -41,6 +44,23 @@ namespace AspNetCoreTask.Controllers
             var postX = _service.GetPostX(postId);
             return View("PostXDetails", postX);
         }
+
+        #endregion
+
+        #region UserX
+        public IActionResult SearchUserX()
+        {
+            return View("SearchUserX");
+        }
+
+        public IActionResult UserXDetails(int userId)
+        {
+            var user = _service.GetUserX(userId);
+            return View("UserXDetails", user);
+        }
+        #endregion
+        #endregion
+
 
         public IActionResult Error()
         {
