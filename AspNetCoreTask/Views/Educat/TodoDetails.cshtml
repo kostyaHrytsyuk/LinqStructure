@@ -9,24 +9,25 @@
 <div>
     <h4>Todo</h4>
     <hr />
-    <dl class="dl-horizontal">
-        @foreach (var todo in Model)
-        {
-            <dt>
-                @Html.Label("Todo id:")
-            </dt>
-            <dd>
-                @Html.Label(todo.Id.ToString())
-            </dd>
-            <dt>
-                @Html.Label("Todo name:")
-            </dt>
-            <dd>
-                @Html.Label(todo.Name)
-            </dd>
-            <hr />
-        }
-    </dl>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Todo id</th>
+                <th scope="col">Todo name</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var todo in Model)
+            {
+                <tr>
+                    <td>@todo.Id</td>
+                    <td>@todo.Name</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |

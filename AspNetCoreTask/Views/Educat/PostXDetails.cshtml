@@ -9,42 +9,34 @@
 <div>
     <h4>PostX</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.Label("Post title")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Post.Title)
-        </dd>
-        <dt>
-            @Html.Label("Post body")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Post.Body)
-        </dd>
-        @if (Model.Post.Comments.Count != 0)
-        {
-            <dt class="mr-2">
-                @Html.Label("The longest comment")
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.LongestComment.Body)
-            </dd>
-            <dt>
-                @Html.Label("The most liked comment")
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.BestCommentByLikes.Body)
-            </dd>
-            <dt class="mr-2">
-                @Html.Label("Number of short or zero likes comments")
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.NumberOfShort_ZeroLikesComment)
-            </dd>
-        }
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Post title</th>
+                <th scope="col">Post body</th>
+                <th scope="col">The longest comment</th>
+                <th scope="col">The most liked comment</th>
+                <th scope="col">Number of short or zero likes comments</th>
+            </tr>
+        </thead>
 
-    </dl>
+        <tbody>
+            <tr>
+                <td>@Model.Post.Title</td>
+                <td>@Model.Post.Body</td>
+                @if (Model.Post.Comments.Count > 0)
+                {
+                    <td>@Model.LongestComment.Body</td>
+                    <td>@Model.BestCommentByLikes.Body</td>
+                    <td>@Model.NumberOfShort_ZeroLikesComment</td>
+                }
+                else
+                {
+                    <td>There are no comments for this post</td>
+                }
+            </tr>
+        </tbody>
+    </table>
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |

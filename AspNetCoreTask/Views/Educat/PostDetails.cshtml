@@ -9,25 +9,24 @@
 <div>
     <h4>Post</h4>
     <hr />
-    
-    <dl class="dl-horizontal">
-        @foreach (var post in Model)
-        {
-            <dt>
-                @Html.Label("Post title:")
-            </dt>
-            <dd>
-                @Html.Label(post.Title)
-            </dd>
-            <dt>
-                @Html.Label("Number of comments:")
-            </dt>
-            <dt>
-                @Html.Label(post.Comments.Count.ToString())
-            </dt>
-            <hr/>
-        }
-    </dl>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Post title</th>
+                <th scope="col">Number of comments</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var post in Model)
+            {
+                <tr>
+                    <td>@post.Title</td>
+                    <td>@post.Comments.Count</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |

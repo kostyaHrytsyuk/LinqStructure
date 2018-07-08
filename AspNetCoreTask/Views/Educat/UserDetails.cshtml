@@ -9,39 +9,42 @@
 <div>
     <h4>User</h4>
     <hr />
-    <dl class="dl-horizontal">
-        @foreach (var user in Model)
-        {
-            <dt>
-                @Html.Label("Name:")
-            </dt>
-            <dd>
-                @Html.Label(user.Name)
-            </dd>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Number of Todos</th>
+            </tr>
+        </thead>
 
-            if (user.Todos.Count > 0)
+        <tbody>
+            @foreach (var user in Model)
             {
-                <h4>Todo</h4>
-                <dl class="dl-horizontal">
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Todos.Count</td>
+                </tr>
 
-                    @foreach (var todo in user.Todos)
+                @*if (user.Todos.Count > 0)
                     {
-                        <dt>
-                            @Html.Label("Name:")
-                        </dt>
-                        <dd>
-                            @Html.Label(todo.Name)
-                        </dd>
-                    }
-                </dl>
+                        <h4>Todo</h4>
+                        <dl class="dl-horizontal">
 
+                            @foreach (var todo in user.Todos)
+                            {
+                                <dt>
+                                    @Html.Label("Name:")
+                                </dt>
+                                <dd>
+                                    @Html.Label(todo.Name)
+                                </dd>
+                            }
+                        </dl>
+
+                    }*@
             }
-
-
-            <hr />
-        }
-
-    </dl>
+        </tbody>
+    </table>
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |

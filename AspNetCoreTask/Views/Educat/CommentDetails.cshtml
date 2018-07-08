@@ -9,19 +9,25 @@
 <div>
     <h4>Comment</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Comment id</th>
+                <th scope="col">Comment Text</th>
+            </tr>
+        </thead>
 
-        @foreach (var comment in Model)
-        {
-            <dt>
-                @Html.Label("Comment:")
-            </dt>
-            <dd>
-                @Html.Label(comment.Body)
-            </dd>
-            <hr/>
-        }
-    </dl>
+        <tbody>
+            @foreach (var comment in Model)
+            {
+                <tr>
+                    <td>@comment.Id</td>
+                    <td>@comment.Body</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
