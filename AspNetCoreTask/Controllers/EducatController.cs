@@ -61,6 +61,16 @@ namespace AspNetCoreTask.Controllers
         }
         #endregion
 
+        #region Users
+        public IActionResult SearchUsers()
+        {
+            var users = _service.GetUsersSortedByAlphabet();
+            return View("UserDetails", users);
+        }
+
+
+        #endregion
+
         #region PostX
         public IActionResult SearchPostX()
         {
