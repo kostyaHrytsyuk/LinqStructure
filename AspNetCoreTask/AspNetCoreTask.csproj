@@ -17,4 +17,8 @@
     <ProjectReference Include="..\LinqStructure\LinqStructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\" />
+  </ItemGroup>
+
 </Project>

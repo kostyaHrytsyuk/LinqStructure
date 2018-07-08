@@ -24,7 +24,7 @@
         </dd>
         @if (Model.Post.Comments.Count != 0)
         {
-            <dt>
+            <dt class="mr-2">
                 @Html.Label("The longest comment")
             </dt>
             <dd>
@@ -36,7 +36,7 @@
             <dd>
                 @Html.DisplayFor(model => model.BestCommentByLikes.Body)
             </dd>
-            <dt>
+            <dt class="mr-2">
                 @Html.Label("Number of short or zero likes comments")
             </dt>
             <dd>
