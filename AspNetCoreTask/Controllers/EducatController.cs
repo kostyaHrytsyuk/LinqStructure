@@ -21,7 +21,7 @@ namespace AspNetCoreTask.Controllers
         }
 
         #region Views For Service Methods
-
+        #region Post
         public IActionResult SearchPosts()
         {
             return View();
@@ -30,8 +30,23 @@ namespace AspNetCoreTask.Controllers
         public IActionResult GetUserPosts(int userId)
         {
             var posts = _service.GetUsersPosts(userId);
-            return View("PostDetails",posts);
+            return View("PostDetails", posts);
         }
+
+        #endregion
+
+        #region Comment
+        public IActionResult SearchComments()
+        {
+            return View();
+        }
+
+        public IActionResult GetCommentsForUserPosts(int userId)
+        {
+            var comments = _service.GetShortCommentsForUserPosts(userId);
+            return View("CommentDetails", comments);
+        }
+        #endregion
 
         #region PostX
         public IActionResult SearchPostX()
