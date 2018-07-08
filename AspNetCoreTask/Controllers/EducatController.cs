@@ -20,6 +20,11 @@ namespace AspNetCoreTask.Controllers
             return View();
         }
 
+        public IActionResult Search()
+        {
+            return View();
+        }
+
         #region Views For Service Methods
         #region Post
         public IActionResult SearchPosts()
