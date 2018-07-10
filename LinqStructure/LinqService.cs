@@ -113,9 +113,9 @@ namespace LinqStructure
 
         public List<User> GetUsersSortedByAlphabet()
         {
-            Users.OrderBy(u => u.Name).ToList().ForEach(u => u.Todos.OrderByDescending(t => t.Name.Length));
+            var usersSorted = Users.OrderBy(u => { u.Todos = u.Todos.OrderByDescending(t => t.Name).ToList(); return u.Name; }).ToList();
             
-            return Users;
+            return usersSorted;
         }
 
         public UserX GetUserX(int userId)
