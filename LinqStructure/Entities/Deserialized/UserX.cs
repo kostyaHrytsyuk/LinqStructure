@@ -11,11 +11,11 @@ namespace LinqStructure.Entities.Deserialized
         public Post BestPostByComments { get; }
         public Post BestPostByLikes { get; }
 
-        public UserX(User user, Post lastPost, int numbersOfCommentsOfLastPost, int undoneTodosNumber, Post bestPostByComments, Post bestPostByLikes) : this()
+        public UserX(User user, Post lastPost, int undoneTodosNumber, Post bestPostByComments, Post bestPostByLikes) : this()
         {
             User = user;
             LastPost = lastPost;
-            NumbersOfCommentsOfLastPost = numbersOfCommentsOfLastPost;
+            NumbersOfCommentsOfLastPost = LastPost.Comments.Count;
             UndoneTodosNumber = undoneTodosNumber;
             BestPostByComments = bestPostByComments;
             BestPostByLikes = bestPostByLikes;
